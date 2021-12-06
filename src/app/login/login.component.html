@@ -1,0 +1,119 @@
+<div class="container-fluid fixed-top bg-success" *ngIf="(!f)&&log || (f1 && reg)">
+  <div class="row text-center">
+    <h3 class="text-center">Welcome to Adds app</h3>
+    <div class="col-lg-6">
+      <button class="btn btn-primary" (click)="login()">Login</button>
+    </div>
+    <div class="col-lg-6">
+      <button class="btn btn-primary" (click)="register()">register</button>
+    </div>
+  </div>
+    <h2 *ngIf="log" class="text-center">Login</h2>
+    <form *ngIf="log">
+        <div class="row">
+          <div class="col">
+            <input type="text" [(ngModel)]="Email" class="form-control" placeholder="Enter email" name="email">
+          </div>
+          <div class="col">
+            <input type="password" [(ngModel)]="Pass" class="form-control" placeholder="Enter password" name="pswd">
+          </div>
+        </div>
+        <div class="row justify-content-center d-flex">
+            <div class="col m-3 text-center">
+                <button class="btn btn-danger" (click)="submit()">Submit</button>
+            </div>
+            
+        </div>
+      </form>
+      <h2 *ngIf="reg" class="text-center">Register</h2>
+    <form *ngIf="reg">
+        <div class="row mx-5">
+          <div class="col">
+            <input type="text" [(ngModel)]="Name" class="form-control" placeholder="Enter Name" name="email">
+          </div>
+          <div class="col">
+            <input type="password" [(ngModel)]="Pass" class="form-control" placeholder="Enter password" name="pswd">
+          </div>
+        </div>
+        <div class="row m-3">
+          <div class="col-lg-6">
+            <input type="email" [(ngModel)]="Email" class="form-control" placeholder="Enter Email" name="Email">
+          </div>
+        </div>
+        <div class="row mx-5 justify-content-center d-flex">
+          <div class="col m-3 text-center">
+            <button class="btn btn-danger" (click)="submit()">Submit</button>
+        </div>
+            
+        </div>
+      </form>
+</div>
+<div class="container-fluid fixed-top bg-success" *ngIf="!((!f)&&log || (f1 && reg))">
+  <h3 class="text-center">Welcome to Adds app</h3>
+  <div class="text-center">
+    <h2 class="text-center">Hello {{Email}}</h2>
+  </div>
+  <div class="row container text-center">
+    <div class="col-sm-4">
+      <button class="btn btn-info" (click)="create_click()">Create New</button>
+    </div>
+    <div class="col-sm-4">
+      <button class="btn btn-info" (click)="update_click()">Update</button>
+    </div>
+    <div class="col-sm-4">
+      <a href="/adds/src/index.html">LogOut</a>
+    </div>
+  </div>
+
+  <form>
+    <div class="row mx-5" *ngIf="cre">
+      <div class="col">
+        <input type="text" [(ngModel)]="new_name" class="form-control" placeholder="Enter Content" name="par">
+      </div>
+      <div class="col">
+        <input type="text" [(ngModel)]="new_par" class="form-control" placeholder="Enter Content" name="par">
+      </div>
+      <div class="col">
+        <input type="text" [(ngModel)]="new_col" class="form-control" placeholder="Enter Back-ground-color" name="col">
+      </div>
+    </div>
+    
+    <div class="row mt-5 justify-content-center d-flex" *ngIf="cre">
+        <div class="col m-1 text-center">
+                <button class="btn btn-danger" (click)="create()">Create</button>
+            </div>
+    </div>
+    <div class="row mx-5" *ngIf="upd">
+      <div class="col">
+        {{Name}}
+        <input type="text" [(ngModel)]="Name" class="form-control" placeholder="Enter Content" name="par">
+      </div>
+      <div class="col">
+        {{par}}
+        <input type="text" [(ngModel)]="par" class="form-control" placeholder="Enter Content" name="par">
+      </div>
+      <div class="col">
+        <input type="text" [(ngModel)]="col" class="form-control" placeholder="Enter Back-ground-color" name="col">
+      </div>
+    </div>
+    
+    <div class="row mt-5 justify-content-center d-flex" *ngIf="upd">
+        <div class="col m-1 text-center">
+                <button class="btn btn-danger" (click)="update()">Update</button>
+            </div>
+    </div>
+  </form>
+  </div>
+ <div class="container col-lg-12" >
+   <h2 class="text-center">Comments</h2>
+      <ul  style="list-style-type: none;" *ngFor="let d of app.people">
+        <li style="height: 300px; border: 1px solid black;" > 
+            
+            <p>here are comments for {{d.name}}'s add</p>
+            <p>{{d.comment}}</p>
+            <p class="text-center text-success" *ngIf="!((!f)&&log || (f1 && reg))">Hello {{Email}} give your comments</p>
+            <input *ngIf="!((!f)&&log || (f1 && reg))" type="text" [(ngModel)]="com" class="form-control bg-gray" placeholder="Enter Name" name="email">
+            <button class="text-center bg-info" *ngIf="!((!f)&&log || (f1 && reg))" (click)="postComments(d.Email,d.name,d.comment)" >comment</button>
+        </li>
+      </ul>
+    </div>
